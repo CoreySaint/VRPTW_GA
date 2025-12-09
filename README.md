@@ -7,6 +7,7 @@
   - Random
   - Threading
   - Queue
+  - OS
 - Matplotlib package
 - Pandas package
 - Numpy package
