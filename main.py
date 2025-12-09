@@ -7,16 +7,25 @@ from src.vrptw import VRPTWInstance
 from src.visualization import plot_routes
 from src.genetic_alg import evolve
 
+# Initialize plot queue
 plot_queue = queue.Queue()
 
 def main():
+    """
+    Main function to run, starts the GA and runs automatically on all instances, saves to result array
+    """
+    # Set instance names up in array
     instance_names = ["C108", "C203", "C249", "C266", "R146", "R202", "RC207"]
+    # Initialize results array
     results = []
 
+    # Creat and Initialize output directory
     output_dir = "figures"
     os.makedirs(output_dir, exist_ok=True)
 
+    # Iterate over instances
     for name in instance_names:
+        # Run the GA on each instance
         res = run_ga_on_instance(
             instance_name=name,
             generations=100,
@@ -28,6 +37,9 @@ def main():
     print("Finished all GA experiments.")
 
 def run_ga(customers, depot):
+    """
+    Helper function to run the genetic algorithm on a single instance (Used for testing)
+    """
     evolve(generations=100, customers=customers, depot=depot, plot_queue=plot_queue)
 
 def save_route_plot(instance_name, customers, depot, routes, best_distance, save_dir):
@@ -172,4 +184,5 @@ def run_ga_on_instance(instance_name, generations=100, population_size=50, save_
     }
 
 if __name__ == '__main__':
+
     main()
