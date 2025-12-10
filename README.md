@@ -36,6 +36,7 @@
    - Crossover rate: 80%
    - Top N = 40%
 ## Example Output
+This plot is saved to ./figures
 ![](./figures/C108_best_routes.png "Plot Output")
 
 GA results for C108:  
