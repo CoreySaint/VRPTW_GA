@@ -39,6 +39,9 @@
 This plot is saved to ./figures  
 ![](./figures/C108_best_routes.png "Plot Output")
 
+The figure above shows the paths that the GA determined to be the most efficient. Included in the figure is a legend that labels the various routes taken by different vehicles as well as the central hub.
+Below is the numeric results, showing the route number, the length of the route (number of edges) and the route time (the euclidean distance + penalties).
+
 GA results for C108:  
 Duration: 6.959(s)  
 Route #, Route Length, Route Time  
