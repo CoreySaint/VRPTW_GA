@@ -3,6 +3,7 @@ import random
 import time
 from .visualization import is_paused, should_stop
 
+#builds full distance matrix for depot and customers
 def build_distance_matrix(customers, depot):
     coords = [tuple(depot)] + [
         (row["x"], row["y"]) for _, row in customers.iterrows()
@@ -16,6 +17,7 @@ def build_distance_matrix(customers, depot):
             dist[i][j] = math.hypot(x1 - x2, y1 - y2)
     return dist
 
+#splits customer order into balanced vehicle routes
 def split_into_routes(order, num_vehicles):
     n = len(order)
     base = n // num_vehicles
@@ -30,6 +32,7 @@ def split_into_routes(order, num_vehicles):
 
     return routes
 
+#evaluates total route cost with distance and lateness penalties
 def evaluate(routes, customers, dist_matrix, penalty=1000.0):
     total_distance = 0.0
     total_lateness = 0.0
@@ -66,6 +69,7 @@ def evaluate(routes, customers, dist_matrix, penalty=1000.0):
     
     return fitness, total_distance
 
+#performs order crossover to combine two parent permutations
 def order_crossover(parent1, parent2):
     n = len(parent1)
     if n < 2:
@@ -92,6 +96,7 @@ def order_crossover(parent1, parent2):
 
     return child1, child2
 
+#applies simple adjacent-swap mutation to routes
 def mutate(routes, mutation_rate):
     new_routes = [r[:] for r in routes]
 
@@ -102,6 +107,7 @@ def mutate(routes, mutation_rate):
 
     return new_routes
 
+#runs the full ga loop
 def evolve(generations, customers, depot, plot_queue=None, population_size=50, num_vehicles=None, crossover_rate=0.8, mutation_rate=0.2, top_n_fraction=0.4):
     num_customers = len(customers)
     if num_vehicles is None:
